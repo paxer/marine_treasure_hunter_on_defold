@@ -33,8 +33,10 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") then
 		self.input.y = -1
 	elseif action_id == hash("left") then
+		sprite.set_hflip("player#sprite", true)
 		self.input.x = -1
 	elseif action_id == hash("right") then
+		sprite.set_hflip("player#sprite", false)
 		self.input.x = 1
 	end
 
