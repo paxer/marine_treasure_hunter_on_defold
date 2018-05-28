@@ -1,5 +1,5 @@
 [project]
-title = My project
+title = Marine Treasure Hunter
 version = 0.1
 
 [bootstrap]
@@ -11,7 +11,7 @@ use_accelerometer = 0
 
 [display]
 width = 1280
-height = 720
+height = 768
 
 [physics]
 scale = 0.02
