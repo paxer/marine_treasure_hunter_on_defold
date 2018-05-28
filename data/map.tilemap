@@ -1,4 +1,4 @@
-tile_set: "/main/map.tilesource"
+tile_set: "/data/map.tilesource"
 layers {
   id: "environment"
   z: 0.0

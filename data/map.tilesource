@@ -1,4 +1,4 @@
-image: "/main/images/tiles.png"
+image: "/data/images/tiles.png"
 tile_width: 64
 tile_height: 64
 tile_margin: 0
