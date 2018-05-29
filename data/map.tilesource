@@ -3,8 +3,18 @@ tile_width: 64
 tile_height: 64
 tile_margin: 0
 tile_spacing: 0
-collision: ""
+collision: "/data/images/tiles.png"
 material_tag: "tile"
+convex_hulls {
+  index: 0
+  count: 6
+  collision_group: ""
+}
+convex_hulls {
+  index: 6
+  count: 4
+  collision_group: ""
+}
 collision_groups: "default"
 animations {
   id: "anim"

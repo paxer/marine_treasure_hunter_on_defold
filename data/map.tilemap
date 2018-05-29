@@ -151,6 +151,13 @@ layers {
     v_flip: 0
   }
   cell {
+    x: 21
+    y: 0
+    tile: 0
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
     x: 0
     y: 11
     tile: 1
@@ -292,6 +299,13 @@ layers {
   }
   cell {
     x: 20
+    y: 11
+    tile: 1
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 21
     y: 11
     tile: 1
     h_flip: 0
