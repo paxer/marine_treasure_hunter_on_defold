@@ -1,6 +1,9 @@
 images {
   image: "/data/images/player.png"
 }
+images {
+  image: "/data/images/bullet.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0

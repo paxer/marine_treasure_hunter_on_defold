@@ -1,8 +1,10 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.moving = false
+	self.firing = false
 	self.input = vmath.vector3()
 	self.dir = vmath.vector3(1, 0, 0)
+	self.player_faceing_left = false
 	self.speed = 100
 	self.stop_moving_down = false
 	self.stop_moving_up = false
@@ -21,9 +23,14 @@ function update(self, dt)
 		go.set_position(pos)
 	end
 
+	if self.firing then
+		spawn_bullet(self)
+	end
+
 	self.input.y = 0
 	self.input.x = 0
 	self.moving = false
+	self.firing = false
 end
 
 function on_message(self, message_id, message, sender)
@@ -49,12 +56,16 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") and not self.stop_moving_down then
 		self.input.y = -1
 	elseif action_id == hash("left") and pos.x >= self.left_side_border_x then
+		self.player_faceing_left = true
+		sprite.set_hflip("player#sprite", true)
 		self.input.x = -1
 	elseif action_id == hash("right") and pos.x <= self.right_side_border_x then
+		sprite.set_hflip("player#sprite", false)
+		self.player_faceing_left = false
 		self.input.x = 1
+	elseif action_id == hash("fire") and action.pressed then
+		self.firing = true
 	end	
-
-	sprite.set_hflip("player#sprite", action_id == hash("left"))
 
 	if vmath.length(self.input) > 0 then
 		self.moving = true
@@ -65,4 +76,12 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
+end
+
+function spawn_bullet(self)
+	pos = go.get_position()
+	props = { dir = self.dir, player_faceing_left = self.player_faceing_left }
+	player_dir = self.player_faceing_left and -1 or 1
+	bullet_x_pos = pos.x + (10 * player_dir) -- we multiply by -1 or 1 in order spawn bullet from left (-10 form player position) or right +10 from player.x
+	factory.create("#bullet_factory", vmath.vector3(bullet_x_pos, pos.y + 6, 0), rot, props)
 end

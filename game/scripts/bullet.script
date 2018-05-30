@@ -1,0 +1,22 @@
+go.property("dir", vmath.vector3())
+go.property("player_faceing_left", false)
+
+function init(self)
+	self.speed = 200
+	self.left_screen_border_x = 0
+	self.right_screen_border_x = tonumber(sys.get_config("display.width"))
+end
+
+function update(self, dt)
+	pos = go.get_position()
+	dir_x = self.player_faceing_left and -1 or 1
+	pos = pos + vmath.vector3(dir_x, 0, 0) * self.speed * dt
+	go.set_position(pos)
+	destroy(self, pos)
+end
+
+function destroy(self, pos)
+	if pos.x > self.right_screen_border_x or pos.x < self.left_screen_border_x then
+		go.delete()
+	end
+end
