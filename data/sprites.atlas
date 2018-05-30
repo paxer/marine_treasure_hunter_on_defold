@@ -4,6 +4,9 @@ images {
 images {
   image: "/data/images/bullet.png"
 }
+images {
+  image: "/data/images/ship.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
