@@ -34,3 +34,7 @@ key_trigger {
   input: KEY_D
   action: "right"
 }
+mouse_trigger {
+  input: MOUSE_BUTTON_LEFT
+  action: "fire"
+}
