@@ -7,6 +7,9 @@ images {
 images {
   image: "/data/images/ship.png"
 }
+images {
+  image: "/data/images/hose_segment.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
