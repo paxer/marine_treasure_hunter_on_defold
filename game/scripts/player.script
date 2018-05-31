@@ -57,12 +57,10 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") and not self.stop_moving_down then
 		self.input.y = -1
 	elseif action_id == hash("left") and pos.x >= self.left_side_border_x then
-		msg.post("ship", "update_x_pos", { pos_x = pos.x })
 		self.player_faceing_left = true
 		sprite.set_hflip("player#sprite", true)
 		self.input.x = -1
 	elseif action_id == hash("right") and pos.x <= self.right_side_border_x then
-		msg.post("ship", "update_x_pos", { pos_x = pos.x })
 		sprite.set_hflip("player#sprite", false)
 		self.player_faceing_left = false
 		self.input.x = 1

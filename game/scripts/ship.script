@@ -1,6 +1,7 @@
 function init(self)
 	-- Add initialization code here
 	-- Remove this function if not needed
+	self.pos = go.get_position()
 end
 
 function final(self)
@@ -9,15 +10,11 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
+	player_pos = go.get_position("player")
+	go.set_position(vmath.vector3(player_pos.x, self.pos.y, self.pos.z))
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("update_x_pos") then
-		pos = go.get_position()
-		go.set_position(vmath.vector3(message.pos_x, pos.y, pos.z))
-	end
 end
 
 function on_input(self, action_id, action)
