@@ -1,6 +1,5 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	draw_hose(self)
 	self.moving = false
 	self.firing = false
 	self.input = vmath.vector3()
@@ -70,7 +69,7 @@ function on_input(self, action_id, action)
 
 	if vmath.length(self.input) > 0 then
 		self.moving = true
-		self.dir = vmath.normalize(self.input) -- we may need to remove normalize as it slow down diagonal movment
+		self.dir = vmath.normalize(self.input)
 	end
 end
 
@@ -85,22 +84,4 @@ function spawn_bullet(self)
 	player_dir = self.player_faceing_left and -1 or 1
 	bullet_x_pos = pos.x + (10 * player_dir) -- we multiply by -1 or 1 in order spawn bullet from left (-10 form player position) or right +10 from player.x
 	factory.create("#bullet_factory", vmath.vector3(bullet_x_pos, pos.y + 6, 0), rot, props)
-end
-
-function draw_hose(self)
-	ship_pos = go.get_position("ship")
-	player_pos = go.get_position()
-	
-	y_distance_beween_ship_and_player = ship_pos.y - player_pos.y
-	hose_segment_height = 15
-	hose_segments_between_player_and_ship = math.floor(y_distance_beween_ship_and_player / hose_segment_height)
-	
-	pprint(hose_segments_between_player_and_ship)
-
-	start_hose_segment_y_pos = ship_pos.y - 28
-	for i = 1, hose_segments_between_player_and_ship do
-		start_hose_segment_y_pos = start_hose_segment_y_pos - 12
-		factory.create("#hose_factory", vmath.vector3(ship_pos.x, start_hose_segment_y_pos, 1), nil, nil)
-		pprint(i)
-	end
 end
