@@ -10,6 +10,9 @@ function init(self)
 	self.stop_moving_up = false
 	self.left_side_border_x = 32
 	self.right_side_border_x = tonumber(sys.get_config("display.width") - 32)
+	self.bullet_timeout = 0 -- how often a player can shoot
+	self.reload_time = 20
+	self.can_shoot = true
 end
 
 function final(self)
@@ -25,6 +28,13 @@ function update(self, dt)
 
 	if self.firing then
 		spawn_bullet(self)
+	end
+
+	if self.bullet_timeout == self.reload_time then
+		self.can_shoot = true
+	else
+		self.can_shoot = false
+		self.bullet_timeout = self.bullet_timeout + 1
 	end
 
 	self.input.y = 0
@@ -64,7 +74,10 @@ function on_input(self, action_id, action)
 		self.player_faceing_left = false
 		self.input.x = 1
 	elseif action_id == hash("fire") and action.pressed then
-		self.firing = true
+		if self.can_shoot == true then
+			self.bullet_timeout = 0
+			self.firing = true
+		end
 	end	
 
 	if vmath.length(self.input) > 0 then
