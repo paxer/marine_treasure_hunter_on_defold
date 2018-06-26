@@ -10,6 +10,25 @@ images {
 images {
   image: "/data/images/hose_segment.png"
 }
+animations {
+  id: "crab_animation"
+  images {
+    image: "/data/images/crab_1.png"
+  }
+  images {
+    image: "/data/images/crab_2.png"
+  }
+  images {
+    image: "/data/images/crab_3.png"
+  }
+  images {
+    image: "/data/images/crab_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+  flip_horizontal: 0
+  flip_vertical: 0
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0

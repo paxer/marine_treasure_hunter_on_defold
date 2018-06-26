@@ -1,0 +1,37 @@
+function init(self)
+	self.speed = 70
+	self.left_screen_border_x = -64
+	self.right_screen_border_x = tonumber(sys.get_config("display.width")) + 64
+end
+
+function final(self)
+	msg.post("map", "spawn_crab")
+end
+
+function update(self, dt)
+	pos = go.get_position()
+	pos = pos + vmath.vector3(1, 0, 0) * self.speed * dt
+	go.set_position(pos)
+	destroy(self, pos)
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end
+
+function destroy(self, pos)
+	if pos.x > self.right_screen_border_x or pos.x < self.left_screen_border_x then
+		go.delete()
+	end
+end
