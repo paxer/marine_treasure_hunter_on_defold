@@ -1,4 +1,3 @@
-go.property("dir", vmath.vector3())
 go.property("player_faceing_left", false)
 
 function init(self)

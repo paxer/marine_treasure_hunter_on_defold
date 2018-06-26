@@ -1,5 +1,7 @@
+go.property("dir", vmath.vector3())
+go.property("speed", 70)
+
 function init(self)
-	self.speed = 70
 	self.left_screen_border_x = -64
 	self.right_screen_border_x = tonumber(sys.get_config("display.width")) + 64
 end
@@ -10,7 +12,7 @@ end
 
 function update(self, dt)
 	pos = go.get_position()
-	pos = pos + vmath.vector3(1, 0, 0) * self.speed * dt
+	pos = pos + self.dir * self.speed * dt
 	go.set_position(pos)
 	destroy(self, pos)
 end

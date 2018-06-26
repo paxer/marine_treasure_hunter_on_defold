@@ -93,7 +93,7 @@ end
 
 function spawn_bullet(self)
 	pos = go.get_position()
-	props = { dir = self.dir, player_faceing_left = self.player_faceing_left }
+	props = { player_faceing_left = self.player_faceing_left }
 	player_dir = self.player_faceing_left and -1 or 1
 	bullet_x_pos = pos.x + (10 * player_dir) -- we multiply by -1 or 1 in order spawn bullet from left (-10 form player position) or right +10 from player.x
 	factory.create("#bullet_factory", vmath.vector3(bullet_x_pos, pos.y + 6, 0), rot, props)
