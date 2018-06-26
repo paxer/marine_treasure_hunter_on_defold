@@ -75,6 +75,7 @@ function on_input(self, action_id, action)
 		self.input.x = 1
 	elseif action_id == hash("fire") and action.pressed then
 		if self.can_shoot == true then
+			msg.post("#shoot_sound", "play_sound")
 			self.bullet_timeout = 0
 			self.firing = true
 		end
