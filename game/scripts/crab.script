@@ -1,18 +1,47 @@
 go.property("dir", vmath.vector3())
 go.property("speed", 70)
 
+local timer = require "game.modules.timer"
+
 function init(self)
+	math.randomseed(os.clock() * 100000000000)
+	if math.random(1, 2) == 1 then
+		self.crab_will_stop = true
+		self.position_where_crab_will_stop = math.random(100, tonumber(sys.get_config("display.width")) - 100)
+	else
+		self.crab_will_stop = false
+	end
 	self.left_screen_border_x = -64
 	self.right_screen_border_x = tonumber(sys.get_config("display.width")) + 64
+	self.crab_delay_timer_started = false
 end
 
 function final(self)
 	msg.post("map", "spawn_crab")
 end
 
+local function crab_will_continue_moving(self)
+	msg.post("#sprite", "play_animation", {id = hash("carb_amimation_idle")})
+	timer.delay(math.random(2, 10), function(self)
+		self.crab_will_stop = false
+		self.crab_delay_timer_started = false
+		msg.post("#sprite", "play_animation", {id = hash("crab_animation")})
+	end)
+	self.crab_delay_timer_started = true
+end
+
 function update(self, dt)
 	pos = go.get_position()
-	pos = pos + self.dir * self.speed * dt
+	if self.crab_will_stop and math.floor(pos.x) ==  self.position_where_crab_will_stop then
+		if math.random(1, 2) == 1 then -- should crab change the direction
+			self.dir.x = self.dir.x * -1
+		end
+		if self.crab_delay_timer_started == false then
+			crab_will_continue_moving(self)
+		end
+	else
+		pos = pos + self.dir * self.speed * dt
+	end
 	go.set_position(pos)
 	destroy(self, pos)
 end
