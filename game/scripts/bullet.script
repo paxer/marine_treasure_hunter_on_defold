@@ -14,6 +14,14 @@ function update(self, dt)
 	destroy(self, pos)
 end
 
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") then
+		if message.enter then
+			go.delete()
+		end
+	end
+end
+
 function destroy(self, pos)
 	if pos.x > self.right_screen_border_x or pos.x < self.left_screen_border_x then
 		go.delete()
