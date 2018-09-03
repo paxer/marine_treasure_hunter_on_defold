@@ -1,0 +1,34 @@
+function init(self)
+	-- Add initialization code here
+	-- Remove this function if not needed
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("player_lost_life") then		
+		local proxy = msg.url("loader#level_proxy")
+		timer.delay(3, false, function(self, handle, time_elapsed)
+			msg.post(proxy, "disable")
+			msg.post(proxy, "final")
+			msg.post(proxy, "unload")
+		end)
+	end
+
+	if message_id == hash("proxy_unloaded") then
+		msg.post("loader#level_proxy", "load")
+	end
+
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	end	
+end

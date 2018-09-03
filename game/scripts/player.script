@@ -59,8 +59,17 @@ function on_message(self, message_id, message, sender)
 		end
 
 		if message.other_group == hash("enemies") then
+
+			print(message.other_id)
+			
+			-- local collided_object = go.get_id(message.other_id)
+			-- collided_object.disable()
+			--msg.post(message.other_id, "disable")
+			msg.post(message.other_id, "pause")
+			
+			msg.post(".", "release_input_focus")
 			msg.post("#death_sound", "play_sound")
-			msg.post("map", "player_lost_life")
+			msg.post("main:/controller", "player_lost_life")
 		end
 	end
 end

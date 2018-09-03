@@ -14,6 +14,7 @@ function init(self)
 	self.left_screen_border_x = -64
 	self.right_screen_border_x = tonumber(sys.get_config("display.width")) + 64
 	self.crab_delay_timer_started = false
+	self.is_paused = false
 end
 
 function final(self)
@@ -31,22 +32,27 @@ local function crab_will_continue_moving(self)
 end
 
 function update(self, dt)
-	pos = go.get_position()
-	if self.crab_will_stop and math.floor(pos.x) ==  self.position_where_crab_will_stop then
-		if math.random(1, 2) == 1 then -- should crab change the direction
-			self.dir.x = self.dir.x * -1
+	if not self.is_paused then
+		pos = go.get_position()
+		if self.crab_will_stop and math.floor(pos.x) ==  self.position_where_crab_will_stop then
+			if math.random(1, 2) == 1 then -- should crab change the direction
+				self.dir.x = self.dir.x * -1
+			end
+			if self.crab_delay_timer_started == false then
+				crab_will_continue_moving(self)
+			end
+		else
+			pos = pos + self.dir * self.speed * dt
 		end
-		if self.crab_delay_timer_started == false then
-			crab_will_continue_moving(self)
-		end
-	else
-		pos = pos + self.dir * self.speed * dt
+		go.set_position(pos)
+		destroy_if_offscreen(self, pos)
 	end
-	go.set_position(pos)
-	destroy_if_offscreen(self, pos)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("pause") then
+		self.is_paused = true
+	end
 	if message_id == hash("trigger_response") then
 		if message.enter then
 			if message.other_group == hash("bullets") then

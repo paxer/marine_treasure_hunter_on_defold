@@ -1,7 +1,6 @@
-require "game.modules.crab_spawner"
-
 function init(self)
-	spawn_crab()
+	msg.post("#level_proxy", "load")
+	msg.post(".", "acquire_input_focus")
 end
 
 function final(self)
@@ -9,14 +8,15 @@ function final(self)
 	-- Remove this function if not needed
 end
 
-function update(self, dt)	
+function update(self, dt)
 	-- Add update code here
 	-- Remove this function if not needed
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("spawn_crab") then
-		spawn_crab()
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
 	end
 end
 
