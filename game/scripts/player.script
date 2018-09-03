@@ -43,17 +43,24 @@ function update(self, dt)
 	self.firing = false
 end
 
-function on_message(self, message_id, message, sender)
+function on_message(self, message_id, message, sender)	
 	if message_id == hash("trigger_response") then
-		if message.enter then			
-			if self.dir.y < 0 then
-				self.stop_moving_down = true
+		if message.other_group == hash("world") then
+			if message.enter then			
+				if self.dir.y < 0 then
+					self.stop_moving_down = true
+				else
+					self.stop_moving_up = true
+				end
 			else
-				self.stop_moving_up = true
+				self.stop_moving_down = false
+				self.stop_moving_up = false
 			end
-		else
-			self.stop_moving_down = false
-			self.stop_moving_up = false
+		end
+
+		if message.other_group == hash("enemies") then
+			msg.post("#death_sound", "play_sound")
+			msg.post("map", "player_lost_life")
 		end
 	end
 end

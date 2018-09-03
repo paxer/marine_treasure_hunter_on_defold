@@ -49,13 +49,9 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") then
 		if message.enter then
-			print("HIT")
 			if message.other_group == hash("bullets") then
 				msg.post("#hit", "play_sound")
 				go.delete()
-			end
-			if message.other_group == hash("player") then
-				print("Player")
 			end
 		end
 	end
