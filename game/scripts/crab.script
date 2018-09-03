@@ -51,7 +51,8 @@ function on_message(self, message_id, message, sender)
 		if message.enter then
 			print("HIT")
 			if message.other_group == hash("bullets") then
-				print("Bullet")
+				msg.post("#hit", "play_sound")
+				go.delete()
 			end
 			if message.other_group == hash("player") then
 				print("Player")
