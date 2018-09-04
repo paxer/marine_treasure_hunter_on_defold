@@ -69,7 +69,7 @@ function on_message(self, message_id, message, sender)
 			
 			msg.post(".", "release_input_focus")
 			msg.post("#death_sound", "play_sound")
-			msg.post("main:/controller", "player_lost_life")
+			msg.post("main:/game_manager", "player_lost_life")
 		end
 	end
 end

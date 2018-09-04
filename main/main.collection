@@ -72,10 +72,10 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "controller"
+  id: "game_manager"
   data: "components {\n"
-  "  id: \"controller\"\n"
-  "  component: \"/game/scripts/controller.script\"\n"
+  "  id: \"game_manager\"\n"
+  "  component: \"/game/scripts/game_manager.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
