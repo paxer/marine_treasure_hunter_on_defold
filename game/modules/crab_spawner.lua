@@ -2,7 +2,6 @@
 -- To get access to the functions, you need to put:
 -- require "my_directory.my_file"
 -- in any script using the functions.
-local timer = require "game.modules.timer"
 local create_crab
 local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") + 64)
 local left_side_screen_spawn_x = -64
@@ -26,5 +25,5 @@ end
 function spawn_crab()
 	math.randomseed(os.clock() * 100000000000)
 	local seconds_delay = math.random(1, 5)
-	timer.delay(seconds_delay, create_crab)
+	timer.delay(seconds_delay, false, create_crab)
 end
