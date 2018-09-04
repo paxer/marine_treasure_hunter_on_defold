@@ -1,3 +1,5 @@
+local object_helpers = require "game.modules.object_helpers"
+
 go.property("dir", vmath.vector3())
 go.property("speed", 70)
 
@@ -9,8 +11,6 @@ function init(self)
 	else
 		self.crab_will_stop = false
 	end
-	self.left_screen_border_x = -64
-	self.right_screen_border_x = tonumber(sys.get_config("display.width")) + 64
 	self.crab_delay_timer_started = false
 	self.is_paused = false
 end
@@ -43,7 +43,7 @@ function update(self, dt)
 			pos = pos + self.dir * self.speed * dt
 		end
 		go.set_position(pos)
-		destroy_if_offscreen(self, pos)
+		object_helpers.destroy_if_offscreen(self, pos)
 	end
 end
 
@@ -69,10 +69,4 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
-end
-
-function destroy_if_offscreen(self, pos)
-	if pos.x > self.right_screen_border_x or pos.x < self.left_screen_border_x then
-		go.delete()
-	end
 end

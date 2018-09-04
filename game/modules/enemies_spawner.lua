@@ -4,28 +4,47 @@
 -- in any script using the functions.
 local M = {}
 local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") + 64)
+local top_screen_spawn_y = tonumber(sys.get_config("display.height") - 128)
+local bottom_screen_spawn_y = 80
 local left_side_screen_spawn_x = -64
 local x_start_positions = { left_side_screen_spawn_x, right_side_screen_spawn_x } -- could start from left or right screen side
-local x_direction
 
-local create_crab = function()
+local set_random_pos_and_dir = function()
+	math.randomseed(os.clock() * 100000000000)
+	local x_direction
 	local x_start_position = x_start_positions[math.random(1, 2)]
 	if x_start_position == left_side_screen_spawn_x then
 		x_direction = 1
 	else
 		x_direction = -1
 	end
-	local pos = vmath.vector3(x_start_position, 80, 1)
+	local pos = vmath.vector3(x_start_position, bottom_screen_spawn_y, 1)
 	local dir = vmath.vector3(x_direction, 0, 0)
-	local speed = math.random(20, 50)
+
+	return pos, dir
+end
+
+local create_crab = function()
+	local pos, dir = set_random_pos_and_dir()
+	local speed = math.random(10, 40)
 	local props = { dir = dir, speed = speed }
 	factory.create("#crab_factory", pos, nil, props)
 end
 
+local create_fish = function()
+	local pos, dir = set_random_pos_and_dir()
+	pos.y = math.random(bottom_screen_spawn_y, top_screen_spawn_y)
+	local speed = math.random(30, 70)
+	local props = { dir = dir, speed = speed }
+	factory.create("#fish_factory", pos, nil, props)
+end
+
 function M.spawn_crab()
-	math.randomseed(os.clock() * 100000000000)
-	local seconds_delay = math.random(3, 8)
-	timer.delay(seconds_delay, false, create_crab)
+	timer.delay(math.random(5, 15), false, create_crab)
+end
+
+function M.spawn_fish()
+	timer.delay(math.random(3, 8), false, create_fish)
 end
 
 return M
