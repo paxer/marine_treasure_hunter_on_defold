@@ -1,6 +1,12 @@
 require "game.modules.crab_spawner"
 
 function init(self)
+	local yscale = go.get("#background", "scale.y")
+	local xscale = go.get("#background", "scale.x")
+	go.set("#background", "scale.y", yscale * 3.5)
+	go.set("#background", "scale.x", xscale * 2.5)
+	
+	msg.post("#background_music", "play_sound")
 	spawn_crab()
 end
 
