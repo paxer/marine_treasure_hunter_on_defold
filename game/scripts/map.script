@@ -1,4 +1,4 @@
-require "game.modules.crab_spawner"
+local enemies_spawner = require "game.modules.enemies_spawner"
 
 function init(self)
 	local yscale = go.get("#background", "scale.y")
@@ -7,7 +7,7 @@ function init(self)
 	go.set("#background", "scale.x", xscale * 2.5)
 	
 	msg.post("#background_music", "play_sound")
-	spawn_crab()
+	enemies_spawner.spawn_crab()
 end
 
 function final(self)
@@ -22,7 +22,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("spawn_crab") then
-		spawn_crab()
+		enemies_spawner.spawn_crab()
 	end
 end
 

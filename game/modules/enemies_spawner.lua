@@ -2,7 +2,7 @@
 -- To get access to the functions, you need to put:
 -- require "my_directory.my_file"
 -- in any script using the functions.
-local create_crab
+local M = {}
 local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") + 64)
 local left_side_screen_spawn_x = -64
 local x_start_positions = { left_side_screen_spawn_x, right_side_screen_spawn_x } -- could start from left or right screen side
@@ -22,8 +22,10 @@ local create_crab = function()
 	factory.create("#crab_factory", pos, nil, props)
 end
 
-function spawn_crab()
+function M.spawn_crab()
 	math.randomseed(os.clock() * 100000000000)
-	local seconds_delay = math.random(1, 5)
+	local seconds_delay = math.random(3, 8)
 	timer.delay(seconds_delay, false, create_crab)
 end
+
+return M
