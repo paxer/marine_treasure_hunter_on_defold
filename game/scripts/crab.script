@@ -1,4 +1,5 @@
 local object_helpers = require "game.modules.object_helpers"
+local enemies = require "game.modules.enemies"
 
 go.property("dir", vmath.vector3())
 go.property("speed", 70)
@@ -12,7 +13,6 @@ function init(self)
 		self.crab_will_stop = false
 	end
 	self.crab_delay_timer_started = false
-	self.is_paused = false
 end
 
 function final(self)
@@ -48,25 +48,6 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("pause") then
-		self.is_paused = true
-	end
-	if message_id == hash("trigger_response") then
-		if message.enter then
-			if message.other_group == hash("bullets") then
-				msg.post("#hit", "play_sound")
-				go.delete()
-			end
-		end
-	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Remove this function if not needed
+	enemies.handle_is_paused(self, message_id)
+	enemies.handle_bullets_hit(message_id, message)
 end

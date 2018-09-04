@@ -1,3 +1,11 @@
+local function spawn_bullet(self)
+	pos = go.get_position()
+	props = { player_faceing_left = self.player_faceing_left }
+	player_dir = self.player_faceing_left and -1 or 1
+	bullet_x_pos = pos.x + (10 * player_dir) -- we multiply by -1 or 1 in order spawn bullet from left (-10 form player position) or right +10 from player.x
+	factory.create("#bullet_factory", vmath.vector3(bullet_x_pos, pos.y + 6, 0), rot, props)
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.moving = false
@@ -59,14 +67,7 @@ function on_message(self, message_id, message, sender)
 		end
 
 		if message.other_group == hash("enemies") then
-
-			print(message.other_id)
-			
-			-- local collided_object = go.get_id(message.other_id)
-			-- collided_object.disable()
-			--msg.post(message.other_id, "disable")
-			msg.post(message.other_id, "pause")
-			
+			msg.post(message.other_id, "pause")			
 			msg.post(".", "release_input_focus")
 			msg.post("#death_sound", "play_sound")
 			msg.post("main:/game_manager", "player_lost_life")
@@ -106,12 +107,4 @@ end
 function on_reload(self)
 	-- Add reload-handling code here
 	-- Remove this function if not needed
-end
-
-function spawn_bullet(self)
-	pos = go.get_position()
-	props = { player_faceing_left = self.player_faceing_left }
-	player_dir = self.player_faceing_left and -1 or 1
-	bullet_x_pos = pos.x + (10 * player_dir) -- we multiply by -1 or 1 in order spawn bullet from left (-10 form player position) or right +10 from player.x
-	factory.create("#bullet_factory", vmath.vector3(bullet_x_pos, pos.y + 6, 0), rot, props)
 end
