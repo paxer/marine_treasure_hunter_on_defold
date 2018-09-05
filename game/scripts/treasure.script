@@ -7,11 +7,6 @@ function init(self)
 	self.init_y_pos = go.get_position().y
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Remove this function if not needed
-end
-
 local function landed(self) 
 	self.moving = false 
 end
