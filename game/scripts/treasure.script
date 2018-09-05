@@ -1,4 +1,7 @@
 function init(self)
+	self.player_pos = go.get_position("player")
+	self.chest_pos = go.get_position()
+	self.ship_pos = go.get_position("ship")
 	self.moving = false
 	self.should_follow_player = false
 	self.init_y_pos = go.get_position().y
@@ -15,22 +18,32 @@ end
 
 local function follow_player(self)
 	if not self.moving and self.should_follow_player then
-		self.moving = true 
-		local player_pos = go.get_position("player")
-		local chest_pos = go.get_position()
-		if chest_pos.y >= self.init_y_pos then
-			pos = vmath.vector3(player_pos.x, player_pos.y - 30, 0) 
-			go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.3, 0, landed) 
+		self.moving = true
+
+		if self.chest_pos.y >= self.init_y_pos and self.player_pos.y >= self.init_y_pos + 7 then
+			pos = vmath.vector3(self.player_pos.x, self.player_pos.y - 25, 0) 
+			go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.2, 0, landed) 
 		else
-			go.set_position(vmath.vector3(chest_pos.x, self.init_y_pos, 1))
+			go.set_position(vmath.vector3(self.chest_pos.x, self.init_y_pos, 1))
 			landed(self)
 			self.should_follow_player = false
 		end		
 	end
 end
 
+local function detect_shipping(self) 
+	if vmath.length(self.ship_pos - self.chest_pos) <= 90 then
+		msg.post("main:/game_manager", "treasure_shipped")
+		go.delete()
+	end
+end
+
 function update(self, dt)
+	self.player_pos = go.get_position("player")
+	self.chest_pos = go.get_position()
+	self.ship_pos = go.get_position("ship")
 	follow_player(self)
+	detect_shipping(self)
 end
 
 function on_message(self, message_id, message, sender)
