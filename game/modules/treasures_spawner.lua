@@ -11,8 +11,7 @@ local y_spawn = 87
 local create_chest = function()
 	local x = math.random(left_side_screen_spawn_x, right_side_screen_spawn_x)
 	local pos = vmath.vector3(x, y_spawn, 1)
-	--local dir = vmath.vector3(x_direction, 0, 0)
-	factory.create("#chest_factory", pos, nil, nil)
+	factory.create("#chest_factory", pos)
 end
 
 function M.spawn_treasures()

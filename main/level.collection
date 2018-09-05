@@ -258,6 +258,7 @@ embedded_instances {
   "group: \\\"player\\\"\\n"
   "mask: \\\"world\\\"\\n"
   "mask: \\\"enemies\\\"\\n"
+  "mask: \\\"treasures\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"

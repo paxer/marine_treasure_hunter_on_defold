@@ -1,0 +1,44 @@
+function init(self)
+	self.moving = false
+	self.should_follow_player = false
+	self.init_y_pos = go.get_position().y
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+local function landed(self) 
+	self.moving = false 
+end
+
+local function follow_player(self)
+	if not self.moving and self.should_follow_player then
+		self.moving = true 
+		local player_pos = go.get_position("player")
+		local chest_pos = go.get_position()
+		if chest_pos.y >= self.init_y_pos then
+			pos = vmath.vector3(player_pos.x, player_pos.y - 30, 0) 
+			go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.3, 0, landed) 
+		else
+			go.set_position(vmath.vector3(chest_pos.x, self.init_y_pos, 1))
+			landed(self)
+			self.should_follow_player = false
+		end		
+	end
+end
+
+function update(self, dt)
+	follow_player(self)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") then
+		if message.enter then
+			if message.other_group == hash("player") then			
+				self.should_follow_player = true
+			end
+		end
+	end	
+end
