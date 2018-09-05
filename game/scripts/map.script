@@ -1,4 +1,5 @@
 local enemies_spawner = require "game.modules.enemies_spawner"
+local treasures_spawner = require "game.modules.treasures_spawner"
 
 function init(self)
 	local yscale = go.get("#background", "scale.y")
@@ -7,8 +8,10 @@ function init(self)
 	go.set("#background", "scale.x", xscale * 2.5)
 	
 	msg.post("#background_music", "play_sound")
+	
 	enemies_spawner.spawn_crab()
 	enemies_spawner.spawn_fish()
+	treasures_spawner.spawn_treasures()
 end
 
 function final(self)
@@ -29,14 +32,4 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("spawn_fish") then
 		enemies_spawner.spawn_fish()
 	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Remove this function if not needed
 end
