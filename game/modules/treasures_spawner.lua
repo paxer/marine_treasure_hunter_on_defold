@@ -2,21 +2,45 @@
 -- To get access to the functions, you need to put:
 -- require "my_directory.my_file"
 -- in any script using the functions.
+local utils = require "game.modules.utils"
+
 local M = {}
 
-local left_side_screen_spawn_x = 64
-local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") - 64)
+local sprite_width = 64
+local display_width = tonumber(sys.get_config("display.width"))
+local left_side_screen_spawn_x = sprite_width
+local right_side_screen_spawn_x =  display_width - sprite_width
+local spawn_area_size = display_width / 3
+local spawn_area1 = {start_point = sprite_width, end_point = spawn_area_size }
+local spawn_area2 = {start_point = spawn_area1.end_point, end_point = spawn_area_size * 2 }
+local spawn_area3 = {start_point = spawn_area2.end_point, end_point = display_width - sprite_width }
+local spawn_areas = { spawn_area1, spawn_area2, spawn_area3 }
 local y_spawn = 87
 
-local create_chest = function()
-	local x = math.random(left_side_screen_spawn_x, right_side_screen_spawn_x)
+local create_chest = function(spawn_area)
+	local x = math.random(spawn_area.start_point, spawn_area.end_point)
 	local pos = vmath.vector3(x, y_spawn, 1)
 	factory.create("#chest_factory", pos)
 end
 
+local create_gold = function(spawn_area)
+	local x = math.random(spawn_area.start_point, spawn_area.end_point)
+	local pos = vmath.vector3(x, y_spawn, 1)
+	factory.create("#gold_factory", pos)
+end
+
+local create_grail = function(spawn_area)
+	local x = math.random(spawn_area.start_point, spawn_area.end_point)
+	local pos = vmath.vector3(x, y_spawn, 1)
+	factory.create("#grail_factory", pos)
+end
+
 function M.spawn_treasures()
 	math.randomseed(os.clock() * 100000000000)
-	create_chest()
+	local shuffled_spawn_areas = utils.shuffle(spawn_areas)
+	create_chest(shuffled_spawn_areas[1])
+	create_gold(shuffled_spawn_areas[2])
+	create_grail(shuffled_spawn_areas[3])
 end
 
 return M

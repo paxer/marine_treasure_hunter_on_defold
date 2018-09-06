@@ -34,7 +34,7 @@ function on_message(self, message_id, message, sender)
 	end	
 
 	if message_id == hash("treasure_shipped") then
-		local new_score = self.current_score + 10
-		msg.post("gui#gui", "update_score", { new_score = new_score })
+		self.current_score = self.current_score + 10
+		msg.post("gui#gui", "update_score", { new_score = self.current_score })
 	end
 end
