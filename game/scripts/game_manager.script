@@ -1,6 +1,7 @@
 function init(self)
-	-- Add initialization code here
-	-- Remove this function if not needed
+	self.init_score = 0
+	msg.post("gui#gui", "update_score", { new_score = self.init_score })
+	self.current_score = 0
 end
 
 function final(self)
@@ -33,6 +34,7 @@ function on_message(self, message_id, message, sender)
 	end	
 
 	if message_id == hash("treasure_shipped") then
-		print("Game Maneger: TREASURE SHIPPED")
+		local new_score = self.current_score + 10
+		msg.post("gui#gui", "update_score", { new_score = new_score })
 	end
 end
