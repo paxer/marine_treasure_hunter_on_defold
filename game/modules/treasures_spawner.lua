@@ -16,6 +16,7 @@ local spawn_area2 = {start_point = spawn_area1.end_point, end_point = spawn_area
 local spawn_area3 = {start_point = spawn_area2.end_point, end_point = display_width - sprite_width }
 local spawn_areas = { spawn_area1, spawn_area2, spawn_area3 }
 local y_spawn = 87
+local grail_y_spawn = y_spawn - 16
 
 local play_chest_animation = function(chest)
 	local animations = { "chest_1", "chest_2", "chest_3" }
@@ -40,7 +41,7 @@ end
 
 local create_grail = function(spawn_area)
 	local x = math.random(spawn_area.start_point, spawn_area.end_point)
-	local pos = vmath.vector3(x, y_spawn - 16, 1)
+	local pos = vmath.vector3(x, grail_y_spawn, 1)
 	factory.create("#grail_factory", pos)
 end
 
