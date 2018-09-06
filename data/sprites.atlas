@@ -19,6 +19,12 @@ images {
 images {
   image: "/data/images/chest.png"
 }
+images {
+  image: "/data/images/gold.png"
+}
+images {
+  image: "/data/images/grail.png"
+}
 animations {
   id: "crab_animation"
   images {
