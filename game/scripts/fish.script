@@ -1,5 +1,5 @@
 local object_helpers = require "game.modules.object_helpers"
-local enemies = require "game.modules.enemies"
+local enemy_behaviour = require "game.modules.enemy_behaviour"
 
 go.property("dir", vmath.vector3())
 go.property("speed", 70)
@@ -24,6 +24,6 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	enemies.handle_is_paused(self, message_id)
-	enemies.handle_bullets_hit(message_id, message)
+	enemy_behaviour.handle_is_paused(self, message_id)
+	enemy_behaviour.handle_bullets_hit(message_id, message)
 end
