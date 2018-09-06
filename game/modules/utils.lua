@@ -19,4 +19,11 @@ function M.shuffle(t)
 	return t
 end
 
+function M.scale_object(url, scale_x, scale_y)
+	local yscale = go.get(url, "scale.y")
+	local xscale = go.get(url, "scale.x")
+	go.set(url, "scale.y", yscale * scale_y)
+	go.set(url, "scale.x", xscale * scale_x)
+end
+
 return M

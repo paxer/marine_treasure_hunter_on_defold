@@ -1,12 +1,9 @@
 local enemies_spawner = require "game.modules.enemies_spawner"
 local treasures_spawner = require "game.modules.treasures_spawner"
+local utils = require "game.modules.utils"
 
 function init(self)
-	local yscale = go.get("#background", "scale.y")
-	local xscale = go.get("#background", "scale.x")
-	go.set("#background", "scale.y", yscale * 3.5)
-	go.set("#background", "scale.x", xscale * 2.5)
-	
+	utils.scale_object("#background", 2.5, 3.5)	
 	msg.post("#background_music", "play_sound")
 	
 	enemies_spawner.spawn_crab()

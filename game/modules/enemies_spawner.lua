@@ -5,7 +5,7 @@
 local M = {}
 local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") + 64)
 local top_screen_spawn_y = tonumber(sys.get_config("display.height") - 128)
-local bottom_screen_spawn_y = 80
+local bottom_screen_spawn_y = 66
 local left_side_screen_spawn_x = -64
 local x_start_positions = { left_side_screen_spawn_x, right_side_screen_spawn_x } -- could start from left or right screen side
 
@@ -26,7 +26,7 @@ end
 
 local create_crab = function()
 	local pos, dir = set_random_pos_and_dir()
-	local speed = math.random(10, 40)
+	local speed = math.random(30, 80)
 	local props = { dir = dir, speed = speed }
 	factory.create("#crab_factory", pos, nil, props)
 end
