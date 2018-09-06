@@ -57,6 +57,72 @@ animations {
   flip_horizontal: 0
   flip_vertical: 0
 }
+animations {
+  id: "chest_1"
+  images {
+    image: "/data/images/chest/blink_1/chest_blink_00.png"
+  }
+  images {
+    image: "/data/images/chest/blink_1/chest_blink_01.png"
+  }
+  images {
+    image: "/data/images/chest/blink_1/chest_blink_02.png"
+  }
+  images {
+    image: "/data/images/chest/blink_1/chest_blink_03.png"
+  }
+  images {
+    image: "/data/images/chest/blink_1/chest_blink_04.png"
+  }
+  playback: PLAYBACK_LOOP_PINGPONG
+  fps: 3
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "chest_2"
+  images {
+    image: "/data/images/chest/blink_2/chest_blink_05.png"
+  }
+  images {
+    image: "/data/images/chest/blink_2/chest_blink_06.png"
+  }
+  images {
+    image: "/data/images/chest/blink_2/chest_blink_07.png"
+  }
+  images {
+    image: "/data/images/chest/blink_2/chest_blink_08.png"
+  }
+  images {
+    image: "/data/images/chest/blink_2/chest_blink_09.png"
+  }
+  playback: PLAYBACK_LOOP_PINGPONG
+  fps: 3
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "chest_3"
+  images {
+    image: "/data/images/chest/blink_3/chest_blink_10.png"
+  }
+  images {
+    image: "/data/images/chest/blink_3/chest_blink_11.png"
+  }
+  images {
+    image: "/data/images/chest/blink_3/chest_blink_12.png"
+  }
+  images {
+    image: "/data/images/chest/blink_3/chest_blink_13.png"
+  }
+  images {
+    image: "/data/images/chest/blink_3/chest_blink_14.png"
+  }
+  playback: PLAYBACK_LOOP_PINGPONG
+  fps: 3
+  flip_horizontal: 0
+  flip_vertical: 0
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
