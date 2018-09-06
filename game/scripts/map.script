@@ -3,7 +3,7 @@ local treasures_spawner = require "game.modules.treasures_spawner"
 local utils = require "game.modules.utils"
 
 function init(self)
-	utils.scale_object("#background", 2.5, 3.5)	
+	utils.scale_object("#background", 2.5, 3.5)
 	msg.post("#background_music", "play_sound")
 	
 	enemies_spawner.spawn_crab()

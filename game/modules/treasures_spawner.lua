@@ -40,7 +40,7 @@ end
 
 local create_grail = function(spawn_area)
 	local x = math.random(spawn_area.start_point, spawn_area.end_point)
-	local pos = vmath.vector3(x, y_spawn, 1)
+	local pos = vmath.vector3(x, y_spawn - 16, 1)
 	factory.create("#grail_factory", pos)
 end
 

@@ -13,6 +13,21 @@ components {
     w: 1.0
   }
 }
+components {
+  id: "grail"
+  component: "/game/scripts/grail.script"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
 embedded_components {
   id: "sprite"
   type: "sprite"
@@ -48,7 +63,7 @@ embedded_components {
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
   "      x: 1.0\n"
-  "      y: -6.0\n"
+  "      y: -5.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -60,8 +75,8 @@ embedded_components {
   "    index: 0\n"
   "    count: 3\n"
   "  }\n"
-  "  data: 27.2155\n"
-  "  data: 26.5925\n"
+  "  data: 14.3435\n"
+  "  data: 17.423\n"
   "  data: 10.0\n"
   "}\n"
   "linear_damping: 0.0\n"
