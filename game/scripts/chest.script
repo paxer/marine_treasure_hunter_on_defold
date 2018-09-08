@@ -1,0 +1,12 @@
+local utils = require "game.modules.utils"
+
+local play_animation = function(chest)
+	local animations = { "chest_1", "chest_2", "chest_3" }
+	msg.post(chest, "play_animation", {id = hash(utils.shuffle(animations)[1])})
+end
+
+function init(self)
+	timer.delay(math.random(5, 10), true, function()
+		play_animation(go.get_id())
+	end)
+end
