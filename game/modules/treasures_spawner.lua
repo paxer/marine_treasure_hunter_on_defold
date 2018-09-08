@@ -16,11 +16,11 @@ local spawn_area2 = {start_point = spawn_area1.end_point, end_point = spawn_area
 local spawn_area3 = {start_point = spawn_area2.end_point, end_point = display_width - sprite_width }
 local spawn_areas = { spawn_area1, spawn_area2, spawn_area3 }
 local y_spawn = 87
-local grail_y_spawn = y_spawn - 16
+local grail_y_spawn = y_spawn
 
 local play_chest_animation = function(chest)
 	local animations = { "chest_1", "chest_2", "chest_3" }
-	msg.post(chest, "play_animation", {id = hash(utils.shuffle(animations)[1])})	
+	msg.post(chest, "play_animation", {id = hash(utils.shuffle(animations)[1])})
 end
 
 local create_chest = function(spawn_area)
