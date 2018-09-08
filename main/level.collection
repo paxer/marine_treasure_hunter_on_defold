@@ -249,7 +249,7 @@ embedded_instances {
 embedded_instances {
   id: "player"
   data: "components {\n"
-  "  id: \"player\"\n"
+  "  id: \"script\"\n"
   "  component: \"/game/scripts/player.script\"\n"
   "  position {\n"
   "    x: 0.0\n"

@@ -1,3 +1,5 @@
+go.property("is_lifting_treasure", false)
+
 local function spawn_bullet(self)
 	pos = go.get_position()
 	props = { player_faceing_left = self.player_faceing_left }

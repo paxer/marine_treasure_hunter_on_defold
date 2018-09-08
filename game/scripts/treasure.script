@@ -22,6 +22,7 @@ end
 local function detect_shipping(self) 
 	if vmath.length(self.ship_pos - self.chest_pos) <= 90 then
 		msg.post("main:/game_manager", "treasure_shipped")
+		go.set("player#script", "is_lifting_treasure", false)
 		go.delete()
 	end
 end
@@ -37,7 +38,9 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") then
 		if message.enter then
-			if message.other_group == hash("player") then			
+			if message.other_group == hash("player") and not go.get("player#script", "is_lifting_treasure") then
+				go.set("player#script", "is_lifting_treasure", true)
+				self.one_treasure_picked = true
 				self.should_follow_player = true
 			end
 		end
