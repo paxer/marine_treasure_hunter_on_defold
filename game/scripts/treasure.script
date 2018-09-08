@@ -7,7 +7,7 @@ function init(self)
 	self.init_y_pos = go.get_position().y
 end
 
-local function landed(self) 
+local function shipped(self) 
 	self.moving = false 
 end
 
@@ -15,7 +15,7 @@ local function follow_player(self)
 	if not self.moving and self.should_follow_player then
 		self.moving = true
 		pos = vmath.vector3(self.player_pos.x, self.player_pos.y, 0) 
-		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.2, 0, landed) 
+		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.2, 0, shipped) 
 	end
 end
 
