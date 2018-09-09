@@ -123,6 +123,46 @@ animations {
   flip_horizontal: 0
   flip_vertical: 0
 }
+animations {
+  id: "fish"
+  images {
+    image: "/data/images/fish/sprite_fish00.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish01.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish02.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish03.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish04.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish05.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish06.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish07.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish08.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish09.png"
+  }
+  images {
+    image: "/data/images/fish/sprite_fish10.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0
