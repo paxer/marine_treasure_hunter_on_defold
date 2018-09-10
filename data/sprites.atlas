@@ -39,6 +39,12 @@ animations {
   images {
     image: "/data/images/crab_4.png"
   }
+  images {
+    image: "/data/images/crab_3.png"
+  }
+  images {
+    image: "/data/images/crab_3.png"
+  }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 3
   flip_horizontal: 0
