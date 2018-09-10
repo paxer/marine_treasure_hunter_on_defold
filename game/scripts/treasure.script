@@ -40,7 +40,6 @@ function on_message(self, message_id, message, sender)
 		if message.enter then
 			if message.other_group == hash("player") and not go.get("player#script", "is_lifting_treasure") then
 				go.set("player#script", "is_lifting_treasure", true)
-				self.one_treasure_picked = true
 				self.should_follow_player = true
 			end
 		end
