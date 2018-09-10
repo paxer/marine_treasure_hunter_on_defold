@@ -22,7 +22,7 @@ end
 
 local function crab_will_continue_moving(self)
 	msg.post("#sprite", "play_animation", {id = hash("carb_amimation_idle")})
-	timer.delay(math.random(2, 10), false, function(self)
+	timer.delay(math.random(5, 15), false, function(self)
 		self.crab_will_stop = false
 		self.crab_delay_timer_started = false
 		msg.post("#sprite", "play_animation", {id = hash("crab_animation")})

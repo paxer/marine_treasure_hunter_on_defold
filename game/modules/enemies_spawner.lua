@@ -5,7 +5,7 @@
 local M = {}
 local right_side_screen_spawn_x = tonumber(sys.get_config("display.width") + 64)
 local top_screen_spawn_y = tonumber(sys.get_config("display.height") - 128)
-local bottom_screen_spawn_y = 81
+local bottom_screen_spawn_y = 79
 local left_side_screen_spawn_x = -64
 local x_start_positions = { left_side_screen_spawn_x, right_side_screen_spawn_x } -- could start from left or right screen side
 
