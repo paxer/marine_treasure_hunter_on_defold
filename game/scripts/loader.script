@@ -20,4 +20,16 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
 	end
+
+	if message_id == hash("restart_level") then
+		local proxy = msg.url("main:/loader#level_proxy")
+		timer.delay(3, false, function(self, handle, time_elapsed)
+			msg.post(proxy, "disable")
+			msg.post(proxy, "final")
+			msg.post(proxy, "unload")
+
+			msg.post("#lobby_proxy", "load")
+			timer.delay(5, false, load_level)			
+		end)
+	end
 end

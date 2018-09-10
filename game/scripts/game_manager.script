@@ -5,17 +5,17 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("player_lost_life") then		
-		local proxy = msg.url("loader#level_proxy")
-		timer.delay(3, false, function(self, handle, time_elapsed)
-			msg.post(proxy, "disable")
-			msg.post(proxy, "final")
-			msg.post(proxy, "unload")
-		end)
+	if message_id == hash("player_lost_life") then
+		msg.post("main:/loader", "restart_level")
 	end
 
 	if message_id == hash("treasure_shipped") then
 		self.current_score = self.current_score + 10
+		msg.post("gui#gui", "update_score", { new_score = self.current_score })
+	end
+
+	if message_id == hash("enemy_killed") then
+		self.current_score = self.current_score + 5
 		msg.post("gui#gui", "update_score", { new_score = self.current_score })
 	end
 end
