@@ -1,5 +1,13 @@
-function init(self)
+local function load_level()
+	msg.post("#lobby_proxy", "disable")
+	msg.post("#lobby_proxy", "final")
+	msg.post("#lobby_proxy", "unload")
 	msg.post("#level_proxy", "load")
+end
+
+function init(self)
+	msg.post("#lobby_proxy", "load")
+	timer.delay(5, false, load_level)
 	msg.post(".", "acquire_input_focus")
 end
 

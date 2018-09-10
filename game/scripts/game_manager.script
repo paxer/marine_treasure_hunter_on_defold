@@ -4,16 +4,6 @@ function init(self)
 	self.current_score = 0
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("player_lost_life") then		
 		local proxy = msg.url("loader#level_proxy")
@@ -23,15 +13,6 @@ function on_message(self, message_id, message, sender)
 			msg.post(proxy, "unload")
 		end)
 	end
-
-	if message_id == hash("proxy_unloaded") then
-		msg.post("loader#level_proxy", "load")
-	end
-
-	if message_id == hash("proxy_loaded") then
-		msg.post(sender, "init")
-		msg.post(sender, "enable")
-	end	
 
 	if message_id == hash("treasure_shipped") then
 		self.current_score = self.current_score + 10
