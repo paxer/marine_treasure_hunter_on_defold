@@ -10,7 +10,7 @@ function M.handle_bullets_hit(message_id, message)
 		if message.enter then
 			if message.other_group == hash("bullets") then
 				msg.post("main:/sfx_library#enemy_hit", "play_sound")
-				msg.post("game_manager", "enemy_killed")
+				msg.post("main:/game_manager", "enemy_killed")
 				go.delete()
 			end
 		end

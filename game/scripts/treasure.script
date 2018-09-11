@@ -21,7 +21,7 @@ end
 
 local function detect_shipping(self) 
 	if vmath.length(self.ship_pos - self.chest_pos) <= 90 then
-		msg.post("game_manager", "treasure_shipped")
+		msg.post("main:/game_manager", "treasure_shipped")
 		go.set("player#script", "is_lifting_treasure", false)
 		go.delete()
 	end

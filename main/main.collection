@@ -1,10 +1,85 @@
 name: "main"
 scale_along_z: 0
 embedded_instances {
-  id: "loader"
+  id: "sfx_library"
+  data: "embedded_components {\n"
+  "  id: \"enemy_hit\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/data/sounds/hit.wav\\\"\\n"
+  "looping: 0\\n"
+  "group: \\\"master\\\"\\n"
+  "gain: 1.0\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "game_stats"
   data: "components {\n"
-  "  id: \"loader\"\n"
-  "  component: \"/game/scripts/loader.script\"\n"
+  "  id: \"script\"\n"
+  "  component: \"/game/scripts/game_stats.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "game_manager"
+  data: "components {\n"
+  "  id: \"game_manager\"\n"
+  "  component: \"/game/scripts/game_manager.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -21,24 +96,6 @@ embedded_instances {
   "  id: \"level_proxy\"\n"
   "  type: \"collectionproxy\"\n"
   "  data: \"collection: \\\"/main/level.collection\\\"\\n"
-  "exclude: false\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"lobby_proxy\"\n"
-  "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/main/lobby.collection\\\"\\n"
   "exclude: false\\n"
   "\"\n"
   "  position {\n"
@@ -72,15 +129,10 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "sfx_library"
-  data: "embedded_components {\n"
-  "  id: \"enemy_hit\"\n"
-  "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/data/sounds/hit.wav\\\"\\n"
-  "looping: 0\\n"
-  "group: \\\"master\\\"\\n"
-  "gain: 1.0\\n"
-  "\"\n"
+  id: "gui"
+  data: "components {\n"
+  "  id: \"gui\"\n"
+  "  component: \"/game/objects/gui.gui\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

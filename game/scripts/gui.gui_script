@@ -1,31 +1,21 @@
 function init(self)
-	-- Add initialization code here
-	-- Remove this function if not needed
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
+	local level_info = gui.get_node("level")
+	gui.set_enabled(level_info, false)
 end
 
 function on_message(self, message_id, message, sender)
+	local level_info = gui.get_node("level")
+	
 	if message_id == hash("update_score") then
 		local score_value = gui.get_node("score_value")
 		gui.set_text(score_value, message.new_score)
 	end
-end
 
-function on_input(self, action_id, action)
-	-- Add input-handling code here
-	-- Remove this function if not needed
-end
+	if message_id == hash("show_level_info") then
+		gui.set_enabled(level_info, true)		
+	end
 
-function on_reload(self)
-	-- Add input-handling code here
-	-- Remove this function if not needed
+	if message_id == hash("hide_level_info") then
+		gui.set_enabled(level_info, false)		
+	end
 end

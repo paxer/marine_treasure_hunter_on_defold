@@ -1,21 +1,41 @@
 function init(self)
-	self.init_score = 0
+	self.init_score = go.get("game_stats#script", "score")
 	msg.post("gui#gui", "update_score", { new_score = self.init_score })
-	self.current_score = 0
+	msg.post("#level_proxy", "load")
+	msg.post(".", "acquire_input_focus")
+end
+
+local function load_level()
+	msg.post("#level_proxy", "load")
+end
+
+local function restart_level()
+	local proxy = msg.url("#level_proxy")
+	timer.delay(3, false, function(self, handle, time_elapsed)
+		msg.post(proxy, "disable")
+		msg.post(proxy, "final")
+		msg.post(proxy, "unload")
+		msg.post("gui#gui", "show_level_info")
+		timer.delay(5, false, load_level)			
+	end)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+		msg.post("gui#gui", "hide_level_info")
+	end
+	
 	if message_id == hash("player_lost_life") then
-		msg.post("main:/loader", "restart_level")
+		restart_level()
 	end
 
 	if message_id == hash("treasure_shipped") then
-		self.current_score = self.current_score + 10
-		msg.post("gui#gui", "update_score", { new_score = self.current_score })
+		msg.post("gui#gui", "update_score", { new_score = go.get("game_stats#script", "score") + 10 })
 	end
 
 	if message_id == hash("enemy_killed") then
-		self.current_score = self.current_score + 5
-		msg.post("gui#gui", "update_score", { new_score = self.current_score })
+		msg.post("gui#gui", "update_score", { new_score = go.get("game_stats#script", "score") + 5 })
 	end
 end
