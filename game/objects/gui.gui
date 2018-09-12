@@ -104,7 +104,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "12345\n"
+  text: "0\n"
   ""
   font: "arcade"
   id: "score_value"

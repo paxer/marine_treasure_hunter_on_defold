@@ -1,6 +1,5 @@
 function init(self)
 	self.init_score = go.get("game_stats#script", "score")
-	msg.post("gui#gui", "update_score", { new_score = self.init_score })
 	msg.post("#level_proxy", "load")
 	msg.post(".", "acquire_input_focus")
 end

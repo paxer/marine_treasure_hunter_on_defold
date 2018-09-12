@@ -3,16 +3,22 @@ function init(self)
 	gui.set_enabled(level_info, false)
 end
 
+local function animate_changes(gui_node)
+	gui.animate(gui_node, gui.PROP_SCALE, vmath.vector4(1.5, 1.5, 1.5, 1.5), gui.EASING_INOUTBOUNCE, 0.5, 0, self, gui.PLAYBACK_ONCE_PINGPONG)
+end
+
 function on_message(self, message_id, message, sender)
 	local level_info = gui.get_node("level")
 	
 	if message_id == hash("update_score") then
 		local score_value = gui.get_node("score_value")
+		animate_changes(score_value)				
 		gui.set_text(score_value, message.new_score)
 	end
 
 	if message_id == hash("update_lives") then
 		local lives_value = gui.get_node("lives_value")
+		animate_changes(lives_value)
 		gui.set_text(lives_value, message.new_value)
 	end	
 
