@@ -20,6 +20,18 @@ local function restart_level()
 	end)
 end
 
+local function update_score(value)
+	local new_score = go.get("game_stats#script", "score") + value
+	msg.post("gui#gui", "update_score", { new_score =  new_score })
+	go.set("game_stats#script", "score", new_score)
+end
+
+local function update_lives()
+	local lives_left = go.get("game_stats#script", "lives") - 1
+	msg.post("gui#gui", "update_lives", { new_value =  lives_left })
+	go.set("game_stats#script", "lives", lives_left)
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
 		msg.post(sender, "init")
@@ -28,14 +40,15 @@ function on_message(self, message_id, message, sender)
 	end
 	
 	if message_id == hash("player_lost_life") then
+		update_lives()
 		restart_level()
 	end
 
 	if message_id == hash("treasure_shipped") then
-		msg.post("gui#gui", "update_score", { new_score = go.get("game_stats#script", "score") + 10 })
+		update_score(10)
 	end
 
 	if message_id == hash("enemy_killed") then
-		msg.post("gui#gui", "update_score", { new_score = go.get("game_stats#script", "score") + 5 })
+		update_score(5)
 	end
 end

@@ -11,6 +11,11 @@ function on_message(self, message_id, message, sender)
 		gui.set_text(score_value, message.new_score)
 	end
 
+	if message_id == hash("update_lives") then
+		local lives_value = gui.get_node("lives_value")
+		gui.set_text(lives_value, message.new_value)
+	end	
+
 	if message_id == hash("show_level_info") then
 		gui.set_enabled(level_info, true)		
 	end
