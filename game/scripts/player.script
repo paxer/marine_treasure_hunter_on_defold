@@ -53,7 +53,7 @@ function update(self, dt)
 	self.firing = false
 end
 
-function on_message(self, message_id, message, sender)	
+function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") then
 		if message.other_group == hash("world") then
 			if message.enter then			

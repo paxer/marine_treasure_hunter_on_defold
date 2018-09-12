@@ -21,27 +21,36 @@ local grail_y_spawn = y_spawn
 local create_chest = function(spawn_area)
 	local x = math.random(spawn_area.start_point, spawn_area.end_point)
 	local pos = vmath.vector3(x, y_spawn, 1)
-	local chest = factory.create("#chest_factory", pos)	
+	return factory.create("#chest_factory", pos)	
 end
 
 local create_gold = function(spawn_area)
 	local x = math.random(spawn_area.start_point, spawn_area.end_point)
 	local pos = vmath.vector3(x, y_spawn, 1)
-	factory.create("#gold_factory", pos)
+	return factory.create("#gold_factory", pos)
 end
 
 local create_grail = function(spawn_area)
 	local x = math.random(spawn_area.start_point, spawn_area.end_point)
 	local pos = vmath.vector3(x, grail_y_spawn, 1)
-	factory.create("#grail_factory", pos)
+	return factory.create("#grail_factory", pos)
 end
 
 function M.spawn_treasures()
 	math.randomseed(os.clock() * 100000000000)
 	local shuffled_spawn_areas = utils.shuffle(spawn_areas)
-	create_chest(shuffled_spawn_areas[1])
-	create_gold(shuffled_spawn_areas[2])
-	create_grail(shuffled_spawn_areas[3])
+	local new_chest_id = create_chest(shuffled_spawn_areas[1])
+	local new_gold_id = create_gold(shuffled_spawn_areas[2])
+	local new_grail_id = create_grail(shuffled_spawn_areas[3])	
+	msg.post("main:/game_manager", "treasure_locations", {chest =  go.get_position(new_chest_id), gold = go.get_position(new_gold_id), grail = go.get_position(new_grail_id)})
+end
+
+function M.spawn_treasures_on_pos(treasure_locations)
+	for k, pos in pairs(treasure_locations) do
+		if k == "chest" then factory.create("level:/map#chest_factory", pos) end
+		if k == "grail" then factory.create("level:/map#grail_factory", pos) end
+		if k == "gold" then factory.create("level:/map#gold_factory", pos) end
+	end	
 end
 
 return M

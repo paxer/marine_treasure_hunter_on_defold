@@ -1,3 +1,5 @@
+go.property("type", hash("chest"))
+
 local utils = require "game.modules.utils"
 
 local play_animation = function(chest)

@@ -1,7 +1,4 @@
 function init(self)
-	self.player_pos = go.get_position("player")
-	self.chest_pos = go.get_position()
-	self.ship_pos = go.get_position("ship")
 	self.moving = false
 	self.should_follow_player = false
 	self.init_y_pos = go.get_position().y
@@ -20,8 +17,11 @@ local function follow_player(self)
 end
 
 local function detect_shipping(self) 
-	if vmath.length(self.ship_pos - self.chest_pos) <= 90 then
-		msg.post("main:/game_manager", "treasure_shipped")
+	if vmath.length(self.ship_pos - self.trasure_pos) <= 90 then
+		local url =  msg.url()
+		url.fragment = "script"
+		local type  = go.get(url, "type")
+		msg.post("main:/game_manager", "treasure_shipped", {type = type})
 		go.set("player#script", "is_lifting_treasure", false)
 		go.delete()
 	end
@@ -29,7 +29,7 @@ end
 
 function update(self, dt)
 	self.player_pos = go.get_position("player")
-	self.chest_pos = go.get_position()
+	self.trasure_pos = go.get_position()
 	self.ship_pos = go.get_position("ship")
 	follow_player(self)
 	detect_shipping(self)

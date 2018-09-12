@@ -14,7 +14,7 @@ components {
   }
 }
 components {
-  id: "chest"
+  id: "script"
   component: "/game/scripts/chest.script"
   position {
     x: 0.0

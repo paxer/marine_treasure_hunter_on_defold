@@ -5,10 +5,9 @@ local utils = require "game.modules.utils"
 function init(self)
 	utils.scale_object("#background", 2.5, 3.5)
 	msg.post("#background_music", "play_sound")
-	
+
 	enemies_spawner.spawn_crab()
 	enemies_spawner.spawn_fish()
-	treasures_spawner.spawn_treasures()
 end
 
 function final(self)
@@ -22,6 +21,14 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("spawn_treasures") then
+		treasures_spawner.spawn_treasures()		
+	end
+
+	if message_id == hash("spawn_treasures_on_pos") then
+		treasures_spawner.spawn_treasures_on_pos(message.treasure_locations)		
+	end
+
 	if message_id == hash("spawn_crab") then
 		enemies_spawner.spawn_crab()
 	end

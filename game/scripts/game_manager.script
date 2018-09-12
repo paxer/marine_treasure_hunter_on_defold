@@ -1,7 +1,9 @@
 function init(self)
 	self.init_score = go.get("game_stats#script", "score")
+	self.is_new_game = true
 	msg.post("#level_proxy", "load")
 	msg.post(".", "acquire_input_focus")
+	self.treasure_locations = {}
 end
 
 local function load_level()
@@ -32,7 +34,18 @@ local function update_lives()
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("treasure_locations") then
+		self.treasure_locations = message
+	end
+	
 	if message_id == hash("proxy_loaded") then
+		if self.is_new_game then
+			msg.post("level:/map", "spawn_treasures")
+			self.is_new_game = false
+		else
+			msg.post("level:/map", "spawn_treasures_on_pos", {treasure_locations = self.treasure_locations})
+		end
+		
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
 		msg.post("gui#gui", "hide_level_info")
@@ -44,6 +57,19 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("treasure_shipped") then
+		if message.type == hash("chest") then
+			self.treasure_locations["chest"] = nil	
+		end
+
+		if message.type == hash("grail") then
+			self.treasure_locations["grail"] = nil	
+		end
+
+		if message.type == hash("gold") then
+			self.treasure_locations["gold"] = nil	
+		end
+		
+		pprint(self.treasure_locations)
 		update_score(10)
 	end
 
