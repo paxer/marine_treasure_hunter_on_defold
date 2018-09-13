@@ -1,5 +1,6 @@
 function init(self)
-	self.init_score = go.get("game_stats#script", "score")
+	self.score = 0
+	self.lives = 3
 	self.is_new_game = true
 	msg.post("#level_proxy", "load")
 	msg.post(".", "acquire_input_focus")
@@ -21,16 +22,14 @@ local function restart_level()
 	end)
 end
 
-local function update_score(value)
-	local new_score = go.get("game_stats#script", "score") + value
-	msg.post("gui#gui", "update_score", { new_score =  new_score })
-	go.set("game_stats#script", "score", new_score)
+local function update_score(self, value)
+	self.score = self.score + value
+	msg.post("gui#gui", "update_score", { new_score =  self.score })
 end
 
-local function update_lives()
-	local lives_left = go.get("game_stats#script", "lives") - 1
-	msg.post("gui#gui", "update_lives", { new_value =  lives_left })
-	go.set("game_stats#script", "lives", lives_left)
+local function update_lives(self)
+	self.lives = self.lives - 1
+	msg.post("gui#gui", "update_lives", { new_value =  self.lives })
 end
 
 function on_message(self, message_id, message, sender)
@@ -52,7 +51,7 @@ function on_message(self, message_id, message, sender)
 	end
 	
 	if message_id == hash("player_lost_life") then
-		update_lives()
+		update_lives(self)
 		restart_level()
 	end
 
@@ -68,12 +67,11 @@ function on_message(self, message_id, message, sender)
 		if message.type == hash("gold") then
 			self.treasure_locations["gold"] = nil	
 		end
-		
-		pprint(self.treasure_locations)
-		update_score(10)
+
+		update_score(self, 10)
 	end
 
 	if message_id == hash("enemy_killed") then
-		update_score(5)
+		update_score(self, 5)
 	end
 end

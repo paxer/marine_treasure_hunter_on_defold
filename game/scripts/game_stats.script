@@ -1,2 +1,0 @@
-go.property("score", 0)
-go.property("lives", 3)
