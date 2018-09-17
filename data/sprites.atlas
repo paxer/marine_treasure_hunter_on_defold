@@ -25,6 +25,9 @@ images {
 images {
   image: "/data/images/grail.png"
 }
+images {
+  image: "/data/images/fish_2.png"
+}
 animations {
   id: "crab_animation"
   images {

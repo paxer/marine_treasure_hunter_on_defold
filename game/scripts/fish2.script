@@ -1,0 +1,29 @@
+local object_helpers = require "game.modules.object_helpers"
+local enemy_behaviour = require "game.modules.enemy_behaviour"
+
+go.property("dir", vmath.vector3())
+go.property("speed", 70)
+
+function init(self)
+	if self.dir.x == -1 then
+		sprite.set_hflip("#sprite", true)
+	end
+end
+
+function final(self)
+	msg.post("map", "spawn_fish2")
+end
+
+function update(self, dt)
+	if not self.is_paused then
+		pos = go.get_position()
+		pos = pos + self.dir * self.speed * dt
+		go.set_position(pos)
+		object_helpers.destroy_if_offscreen(self, pos)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	enemy_behaviour.handle_is_paused(self, message_id)
+	enemy_behaviour.handle_bullets_hit(message_id, message)
+end

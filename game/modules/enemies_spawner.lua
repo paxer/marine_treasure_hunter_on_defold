@@ -26,16 +26,22 @@ end
 
 local create_crab = function()
 	local pos, dir = set_random_pos_and_dir()
-	local props = { dir = dir, speed = 25 }
+	local props = { dir = dir, speed = 20 }
 	factory.create("#crab_factory", pos, nil, props)
 end
 
 local create_fish = function()
 	local pos, dir = set_random_pos_and_dir()
-	pos.y = math.random(bottom_screen_spawn_y, top_screen_spawn_y)
-	local speed = math.random(30, 70)
-	local props = { dir = dir, speed = speed }
+	pos.y = math.random(bottom_screen_spawn_y, top_screen_spawn_y / 3) -- should be only deep
+	local props = { dir = dir, speed = 30 }
 	factory.create("#fish_factory", pos, nil, props)
+end
+
+local create_fish2 = function()
+	local pos, dir = set_random_pos_and_dir()
+	pos.y = math.random(bottom_screen_spawn_y, top_screen_spawn_y)
+	local props = { dir = dir, speed = 50 }
+	factory.create("#fish2_factory", pos, nil, props)
 end
 
 function M.spawn_crab()
@@ -43,7 +49,11 @@ function M.spawn_crab()
 end
 
 function M.spawn_fish()
-	timer.delay(math.random(3, 8), false, create_fish)
+	timer.delay(math.random(4, 8), false, create_fish)
+end
+
+function M.spawn_fish2()
+	timer.delay(math.random(1, 3), false, create_fish2)
 end
 
 return M

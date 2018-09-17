@@ -4,7 +4,8 @@ function init(self)
 end
 
 local function animate_changes(gui_node)
-	gui.animate(gui_node, gui.PROP_SCALE, vmath.vector4(1.5, 1.5, 1.5, 1.5), gui.EASING_INOUTBOUNCE, 0.5, 0, self, gui.PLAYBACK_ONCE_PINGPONG)
+	gui.set_scale(gui_node, vmath.vector4(1, 1, 1, 1))
+	gui.animate(gui_node, gui.PROP_SCALE, vmath.vector4(1.5, 1.5, 1.5, 1.5), gui.EASING_LINEAR, 0.5, 0, self, gui.PLAYBACK_ONCE_PINGPONG)
 end
 
 function on_message(self, message_id, message, sender)
