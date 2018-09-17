@@ -8,7 +8,7 @@ function init(self)
 	self.number_of_crabs = 0
 	self.max_number_of_fish2 = 20
 	self.max_number_of_fish = 5
-	self.max_number_of_crab = 2
+	self.max_number_of_crab = 3
 	
 	utils.scale_object("#background", 2.5, 3.5)
 	msg.post("#background_music", "play_sound")
@@ -44,14 +44,17 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("spawn_crab") then
+		if self.number_of_crabs == self.max_number_of_crab then self.number_of_crabs = 0 end
 		if self.number_of_crabs < self.max_number_of_crab then
+			self.number_of_crabs =  self.number_of_crabs + 1
 			enemies_spawner.spawn_crab()
 		else
-			self.number_of_crabs =  self.number_of_crabs + 1
+			self.number_of_crabs =  self.number_of_crabs - 1
 		end
 	end
 
 	if message_id == hash("spawn_fish") then
+		if self.number_of_fishs == self.number_of_fishs then self.number_of_fishs = 0 end
 		if self.number_of_fishs < self.max_number_of_fish  then
 			self.number_of_fishs = self.number_of_fishs + 1
 			enemies_spawner.spawn_fish()
@@ -61,6 +64,7 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("spawn_fish2") then
+		if self.number_of_fish2s == self.number_of_fish2s then self.number_of_fish2s = 0 end
 		if self.number_of_fish2s < self.max_number_of_fish2  then
 			self.number_of_fish2s = self.number_of_fish2s + 1
 			enemies_spawner.spawn_fish2()
