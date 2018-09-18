@@ -9,6 +9,7 @@ function M.handle_bullets_hit(message_id, message)
 	if message_id == hash("trigger_response") then
 		if message.enter then
 			if message.other_group == hash("bullets") then
+				particlefx.play("#enemy_killed")
 				msg.post("main:/sfx_library#enemy_hit", "play_sound")
 				msg.post("main:/game_manager", "enemy_killed")
 				go.delete()
